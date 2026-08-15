@@ -497,11 +497,16 @@
               <div>${stockBadgeHtml}</div>
             </div>
 
-            ${product.stock > 0 ? `
-              <a href="${waLink}" target="_blank" class="btn-whatsapp">
-                💬 Order via WhatsApp
-              </a>
-            ` : `
+${product.stock > 0 ? `
+  <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0;">
+    <label style="font-size: 13px; font-weight: bold; color: #444;">Qty:</label>
+    <select id="qty-${product.id}" onchange="updateWaLink('${product.id}', '${encodeURIComponent(product.title)}', ${product.price})" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px;">
+      ${Array.from({ length: product.stock }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
+    </select>
+  </div>
+  <a id="btn-${product.id}" href="https://wa.me/919403643268?text=${encodeURIComponent(`Hello Advik Creation! I want to order 1 Qty of "${product.title}" (#${product.id}) for ₹${product.price}.`)}" target="_blank" class="btn-whatsapp">
+    💬 Order via WhatsApp
+  </a>            ` : `
               <button class="btn-whatsapp disabled" disabled>Out of Stock</button>
             `}
           </div>
