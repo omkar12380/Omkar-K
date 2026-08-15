@@ -514,6 +514,19 @@ ${product.stock > 0 ? `
       });
     }
 
+    function updateWaLink(id, encodedTitle, price) {
+  const qty = document.getElementById(`qty-${id}`).value;
+  const totalPrice = price * qty;
+  const title = decodeURIComponent(encodedTitle);
+  const phoneNumber = "919403643268";
+  
+  const message = `Hello Advik Creation! I want to order ${qty} Qty of "${title}" (#${id}) for ₹${totalPrice}.`;
+  const link = document.getElementById(`btn-${id}`);
+  
+  if (link) {
+    link.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  }
+}
     renderGrid();
   </script>
   <script>
