@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Advik Creation - Handcrafted Rakhis, Jewelry & Crafts</title>
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <style>
+    :root {
+      /* Palette Extracted from Logo Image */
+      --theme-bg: #F9ECE4;          /* Warm Cream/Nude background */
+      --theme-card-bg: #FFFFFF;     /* Pure white for card contrast */
+      --theme-accent-blue: #718B99; /* Slate Blue from logo droplet */
+      --theme-dark: #1E1E1E;        /* Elegant dark text/accents */
+      --theme-muted: #E6D2C5;       /* Warm border/neutral tone */
+      --theme-hover: #EED7CA;      /* Subtle hover shade */
+      --text-dark: #2C2C2C;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
+    body { background-color: var(--theme-bg); color: var(--text-dark); }
+
+    /* Top Navigation Bar */
+    .header {
+      background: #FFF5EE;
+      padding: 12px 8%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+      border-bottom: 1px solid var(--theme-muted);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .brand-logo img {
+      height: 52px;
+      width: auto;
+      object-fit: contain;
+    }
+    .brand-text {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--theme-dark);
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 1px;
+    }
+
+    /* Stacked Contact Pill Button */
+    .contact-btn {
+      background-color: var(--theme-dark);
+      color: var(--theme-bg);
+      padding: 6px 16px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .contact-phone {
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+    }
+    .contact-name {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--theme-muted);
+      letter-spacing: 0.5px;
+      line-height: 1.2;
+      margin-top: 1px;
+    }
+    .contact-btn:hover {
+      background-color: var(--theme-accent-blue);
+      color: white;
+    }
+    .contact-btn:hover .contact-name {
+      color: #E0EBF0;
+    }
+
+    /* Main Navigation Bar */
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      background: white;
+      padding: 14px 5%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      flex-wrap: wrap;
+    }
+    
+    /* Sub-filter Bar for Rakhi Collections */
+    .sub-category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      background: #F4E4DA;
+      padding: 10px 5%;
+      border-bottom: 1px solid var(--theme-muted);
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      background: var(--theme-bg);
+      border: 1px solid var(--theme-muted);
+      color: var(--theme-dark);
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--theme-dark);
+      color: var(--theme-bg);
+      border-color: var(--theme-dark);
+    }
+
+    .cat-btn-tag {
+      font-size: 9px;
+      font-weight: 500;
+      opacity: 0.8;
+      margin-top: 1px;
+      letter-spacing: 0.3px;
+    }
+
+    .sub-btn {
+      background: white;
+      border: 1px solid var(--theme-muted);
+      color: var(--theme-dark);
+      padding: 6px 14px;
+      border-radius: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 12px;
+    }
+    .sub-btn:hover, .sub-btn.active {
+      background: var(--theme-accent-blue);
+      color: white;
+      border-color: var(--theme-accent-blue);
+    }
+
+    /* Main Container */
+    .container {
+      width: 90%;
+      max-width: 1200px;
+      margin: 25px auto;
+    }
+
+    .hero-banner {
+      background: linear-gradient(135deg, #EED7CA, #E2C7B8);
+      color: var(--theme-dark);
+      padding: 30px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 25px;
+      border: 1px solid var(--theme-muted);
+    }
+    .hero-banner h1 { font-size: 26px; margin-bottom: 6px; }
+
+    /* Product Grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    /* Product Card */
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 16px;
+      border: 1px solid var(--theme-muted);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(113, 139, 153, 0.15);
+    }
+    .card-img-container {
+      position: relative;
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .product-code-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: rgba(30, 30, 30, 0.85);
+      color: white;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    .card-category {
+      font-size: 11px;
+      color: var(--theme-accent-blue);
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .card-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    /* Price & Stock Display */
+    .price-row {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      margin: 10px 0;
+    }
+    .price { font-size: 18px; font-weight: bold; color: var(--theme-dark); }
+    .mrp { font-size: 13px; text-decoration: line-through; color: #888; }
+
+    .stock-badge {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+    }
+    .stock-available { background: #E8F5E9; color: #2E7D32; }
+    .stock-low { background: #FFEBEE; color: #C62828; }
+    .stock-out { background: #EEEEEE; color: #777777; }
+
+    /* WhatsApp Button */
+    .btn-whatsapp {
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      text-decoration: none;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .btn-whatsapp:hover { background-color: #1eb956; }
+    .btn-whatsapp.disabled { background-color: #ccc; cursor: not-allowed; }
+
+    /* Coming Soon Card Container */
+    .coming-soon-container {
+      background: white;
+      border-radius: 12px;
+      border: 1px dashed var(--theme-accent-blue);
+      padding: 60px 20px;
+      text-align: center;
+      margin: 20px 0;
+    }
+    .coming-soon-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: var(--theme-dark);
+      margin-bottom: 8px;
+    }
+    .coming-soon-subtitle {
+      font-size: 14px;
+      color: var(--theme-accent-blue);
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header with Stacked Contact & Name -->
+  <header class="header">
+    <a href="#" class="brand-logo">
+      <img src="advik-logo.png" alt="Advik Creation Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/F9ECE4/1E1E1E?text=ADVIK+CREATION';">
+      <span class="brand-text">Advik Creation</span>
+    </a>
+    <a href="tel:+919403643268" class="contact-btn">
+      <span class="contact-phone">📞 🇮🇳 +91 9403643268</span>
+      <span class="contact-name">Advik Creation</span>
+    </a>
+  </header>
+
+  <!-- Main Section Navigation -->
+  <nav class="category-nav">
+    <button class="cat-btn active" onclick="setMainCategory('all', this)">
+      <span>All Products</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('rakhi', this)">
+      <span>🪔 Handcrafted Rakhis</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Handmade Flowers', this)">
+      <span>🌸 Handmade Flowers</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Artisan Jewelry', this)">
+      <span>💎 Artisan Jewelry</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Craft Goods', this)">
+      <span>🎨 Craft Goods</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+  </nav>
+
+  <!-- Nested Sub-Filter Bar (Only visible under Rakhi section) -->
+  <div class="sub-category-nav" id="rakhiSubNav" style="display: none;">
+    <button class="sub-btn active" onclick="setRakhiSubFilter('All Rakhis', this)">All Rakhis</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Traditional & Designer Collection', this)">Traditional & Designer</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Kids & Cartoon Collection', this)">Kids & Cartoon</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Superhero Collection', this)">Superhero</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Nazar Collection', this)">Nazar Collection</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Devotional Collection', this)">Devotional Collection</button>
+  </div>
+
+  <!-- Main Content -->
+  <div class="container">
+    <div class="hero-banner">
+      <h1>Welcome to Advik Creation</h1>
+      <p>Exclusive Handcrafted Rakhis, Custom Jewelry & Art Works</p>
+    </div>
+
+    <!-- Container for Product Grid or Coming Soon Banner -->
+    <div id="displayArea">
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </div>
+
+  <script>
+    const whatsappNumber = "919403643268";
+    const businessName = "Advik Creation";
+
+    const productsData = [
+      // Table 1: Traditional & Designer Collection
+      { id: "2601", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Ganesha & Om Devotional Rakhi", price: 35, mrp: 40, stock: 4, image: "images/2601.jpg" },
+      { id: "2602", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Golden Peepal Leaf Om Beaded Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2602.jpg" },
+      { id: "2603", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Kundan Lotus Floral Rakhi", price: 45, mrp: 55, stock: 7, image: "images/2603.jpg" },
+      { id: "2604", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Traditional Temple Gold Beaded Rakhi", price: 45, mrp: 55, stock: 6, image: "images/2604.jpg" },
+      { id: "2605", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Antique Floral Crystal Blue Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2605.jpg" },
+      { id: "2606", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Swastik & Crescent Motif Rakhi", price: 45, mrp: 55, stock: 3, image: "images/2606.jpg" },
+      { id: "2607", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Silver Pearl \"BHAI\" Script Rakhi", price: 30, mrp: 35, stock: 4, image: "images/2607.jpg" },
+      { id: "2608", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Classic Emerald & Pearl Floral Rakhi", price: 50, mrp: 60, stock: 6, image: "images/2608.jpg" },
+      { id: "2609", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Peacock Teardrop Gem Rakhi", price: 40, mrp: 45, stock: 2, image: "images/2609.jpg" },
+      { id: "2610", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Azure Peacock Feather Beaded Rakhi", price: 50, mrp: 60, stock: 2, image: "images/2610.jpg" },
+      { id: "2611", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sunburst Divine Om Rakhi", price: 35, mrp: 40, stock: 3, image: "images/2611.jpg" },
+      { id: "2612", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Pearl Encircled Om Sky Blue Rakhi", price: 65, mrp: 75, stock: 6, image: "images/2612.jpg" },
+
+      // Table 2: Kids & Cartoon Collection
+      { id: "2651", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Yellow Minion Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2651.jpg" },
+      { id: "2652", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Motu Patlu Duo Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2652.jpg" },
+      { id: "2653", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Doraemon Oval Charm Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2653.jpg" },
+      { id: "2654", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Astronaut Space Explorer Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2654.jpg" },
+      { id: "2655", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "PAW Patrol Chase Yellow Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2655.jpg" },
+      { id: "2656", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Winged Magical Unicorn Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2656.jpg" },
+
+      // Table 3: Superhero Collection
+      { id: "2661", section: "rakhi", subCategory: "Superhero Collection", title: "Captain America Shield Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2661.jpg" },
+      { id: "2662", section: "rakhi", subCategory: "Superhero Collection", title: "Incredible Hulk Standing Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2662.jpg" },
+      { id: "2663", section: "rakhi", subCategory: "Superhero Collection", title: "Iron Man Flying Pose Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2663.jpg" },
+      { id: "2664", section: "rakhi", subCategory: "Superhero Collection", title: "Doctor Strange Magical Shield Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2664.jpg" },
+      { id: "2665", section: "rakhi", subCategory: "Superhero Collection", title: "Thor God of Thunder Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2665.jpg" },
+      { id: "2666", section: "rakhi", subCategory: "Superhero Collection", title: "Captain Marvel Heroic Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2666.jpg" },
+      { id: "2667", section: "rakhi", subCategory: "Superhero Collection", title: "Chibi Hulk Green Thread Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2667.jpg" },
+      { id: "2668", section: "rakhi", subCategory: "Superhero Collection", title: "Deadpool Action Stance Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2668.jpg" },
+      { id: "2669", section: "rakhi", subCategory: "Superhero Collection", title: "Ant-Man Helmet Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2669.jpg" },
+      { id: "2670", section: "rakhi", subCategory: "Superhero Collection", title: "Classic Chibi Spider-Man Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2670.jpg" },
+      { id: "2671", section: "rakhi", subCategory: "Superhero Collection", title: "Green Lantern Hero Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2671.jpg" },
+
+      // Table 4: Nazar Collection
+      { id: "2681", section: "rakhi", subCategory: "Nazar Collection", title: "Blue Heart Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2681.jpg" },
+      { id: "2682", section: "rakhi", subCategory: "Nazar Collection", title: "Red Circular Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2682.jpg" },
+      { id: "2683", section: "rakhi", subCategory: "Nazar Collection", title: "Green Marquise Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2683.jpg" },
+
+      // Table 5: Devotional Collection (Batch 2)
+      { id: "2691", section: "rakhi", subCategory: "Devotional Collection", title: "Little Bal Krishna Lotus Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2691.jpg" },
+      { id: "2692", section: "rakhi", subCategory: "Devotional Collection", title: "Royal Peacock Ganesha Circular Rakhi", price: 35, mrp: 40, stock: 2, image: "images/2692.jpg" }
+    ];
+
+    let currentMainCategory = 'all';
+    let currentRakhiFilter = 'All Rakhis';
+
+    function setMainCategory(cat, btnElement) {
+      currentMainCategory = cat;
+      currentRakhiFilter = 'All Rakhis';
+
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const rakhiSubNav = document.getElementById('rakhiSubNav');
+      if (cat === 'rakhi') {
+        rakhiSubNav.style.display = 'flex';
+        document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.sub-btn').classList.add('active');
+      } else {
+        rakhiSubNav.style.display = 'none';
+      }
+
+      renderGrid();
+    }
+
+    function setRakhiSubFilter(subCat, btnElement) {
+      currentRakhiFilter = subCat;
+      document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const displayArea = document.getElementById('displayArea');
+      
+      const comingSoonCategories = ['Handmade Flowers', 'Artisan Jewelry', 'Craft Goods'];
+
+      if (comingSoonCategories.includes(currentMainCategory)) {
+        displayArea.innerHTML = `
+          <div class="coming-soon-container">
+            <h2 class="coming-soon-title">Coming Soon ✨</h2>
+            <p class="coming-soon-subtitle">We are crafting beautiful ${currentMainCategory} for you. Stay tuned!</p>
+          </div>
+        `;
+        return;
+      }
+
+      displayArea.innerHTML = `<div class="product-grid" id="productGrid"></div>`;
+      const grid = document.getElementById('productGrid');
+
+      let filtered = productsData;
+
+      if (currentMainCategory !== 'all') {
+        filtered = filtered.filter(p => p.section === currentMainCategory);
+      }
+
+      if (currentMainCategory === 'rakhi' && currentRakhiFilter !== 'All Rakhis') {
+        filtered = filtered.filter(p => p.subCategory === currentRakhiFilter);
+      }
+
+      filtered.forEach(product => {
+        const discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
+
+        let stockBadgeHtml = '';
+        if (product.stock > 4) {
+          stockBadgeHtml = `<span class="stock-badge stock-available">Available Stock: ${product.stock}</span>`;
+        } else if (product.stock > 0) {
+          stockBadgeHtml = `<span class="stock-badge stock-low">Low Stock: Only ${product.stock} left!</span>`;
+        } else {
+          stockBadgeHtml = `<span class="stock-badge stock-out">Out of Stock</span>`;
+        }
+
+        const waText = encodeURIComponent(`Hello ${businessName}! I want to order "${product.title}" (#${product.id}) for ₹${product.price}. Please share payment options.`);
+        const waLink = `https://wa.me/${whatsappNumber}?text=${waText}&name=${encodeURIComponent(businessName)}`;
+
+        grid.innerHTML += `
+          <div class="card">
+            <div>
+              <div class="card-img-container">
+                <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300/F9ECE4/718B99?text=${encodeURIComponent(product.title)}';">
+                <span class="product-code-badge">#${product.id}</span>
+              </div>
+              <div class="card-category">${product.subCategory}</div>
+              <div class="card-title">${product.title}</div>
+
+              <div class="price-row">
+                <span class="price">₹${product.price}</span>
+                <span class="mrp">₹${product.mrp}</span>
+                <span style="color: green; font-weight: bold; font-size: 13px;">${discount}% OFF</span>
+              </div>
+              
+              <div>${stockBadgeHtml}</div>
+            </div>
+
+            ${product.stock > 0 ? `
+              <a href="${waLink}" target="_blank" class="btn-whatsapp">
+                💬 Order via WhatsApp
+              </a>
+            ` : `
+              <button class="btn-whatsapp disabled" disabled>Out of Stock</button>
+            `}
+          </div>
+        `;
+      });
+    }
+
+    renderGrid();
+  </script>
+  <script>
+  if (window.netlifyIdentity) {
+    window.netlifyIdentity.on("init", user => {
+      if (!user) {
+        window.netlifyIdentity.on("login", () => {
+          document.location.href = "/admin/";
+        });
+      }
+    });
+  }
+</script>
+</body>
+</html>
