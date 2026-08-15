@@ -1,0 +1,45 @@
+    const productsData = [
+      // Table 1: Traditional & Designer Collection
+      { id: "2601", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Ganesha & Om Devotional Rakhi", price: 35, mrp: 40, stock: 4, image: "images/2601.jpg" },
+      { id: "2602", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Golden Peepal Leaf Om Beaded Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2602.jpg" },
+      { id: "2603", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Kundan Lotus Floral Rakhi", price: 45, mrp: 55, stock: 7, image: "images/2603.jpg" },
+      { id: "2604", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Traditional Temple Gold Beaded Rakhi", price: 45, mrp: 55, stock: 6, image: "images/2604.jpg" },
+      { id: "2605", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Antique Floral Crystal Blue Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2605.jpg" },
+      { id: "2606", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Swastik & Crescent Motif Rakhi", price: 45, mrp: 55, stock: 3, image: "images/2606.jpg" },
+      { id: "2607", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Silver Pearl \"BHAI\" Script Rakhi", price: 30, mrp: 35, stock: 4, image: "images/2607.jpg" },
+      { id: "2608", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Classic Emerald & Pearl Floral Rakhi", price: 50, mrp: 60, stock: 6, image: "images/2608.jpg" },
+      { id: "2609", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Peacock Teardrop Gem Rakhi", price: 40, mrp: 45, stock: 2, image: "images/2609.jpg" },
+      { id: "2610", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Azure Peacock Feather Beaded Rakhi", price: 50, mrp: 60, stock: 2, image: "images/2610.jpg" },
+      { id: "2611", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sunburst Divine Om Rakhi", price: 35, mrp: 40, stock: 3, image: "images/2611.jpg" },
+      { id: "2612", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Pearl Encircled Om Sky Blue Rakhi", price: 65, mrp: 75, stock: 6, image: "images/2612.jpg" },
+
+      // Table 2: Kids & Cartoon Collection
+      { id: "2651", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Yellow Minion Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2651.jpg" },
+      { id: "2652", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Motu Patlu Duo Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2652.jpg" },
+      { id: "2653", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Doraemon Oval Charm Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2653.jpg" },
+      { id: "2654", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Astronaut Space Explorer Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2654.jpg" },
+      { id: "2655", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "PAW Patrol Chase Yellow Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2655.jpg" },
+      { id: "2656", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Winged Magical Unicorn Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2656.jpg" },
+
+      // Table 3: Superhero Collection
+      { id: "2661", section: "rakhi", subCategory: "Superhero Collection", title: "Captain America Shield Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2661.jpg" },
+      { id: "2662", section: "rakhi", subCategory: "Superhero Collection", title: "Incredible Hulk Standing Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2662.jpg" },
+      { id: "2663", section: "rakhi", subCategory: "Superhero Collection", title: "Iron Man Flying Pose Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2663.jpg" },
+      { id: "2664", section: "rakhi", subCategory: "Superhero Collection", title: "Doctor Strange Magical Shield Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2664.jpg" },
+      { id: "2665", section: "rakhi", subCategory: "Superhero Collection", title: "Thor God of Thunder Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2665.jpg" },
+      { id: "2666", section: "rakhi", subCategory: "Superhero Collection", title: "Captain Marvel Heroic Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2666.jpg" },
+      { id: "2667", section: "rakhi", subCategory: "Superhero Collection", title: "Chibi Hulk Green Thread Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2667.jpg" },
+      { id: "2668", section: "rakhi", subCategory: "Superhero Collection", title: "Deadpool Action Stance Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2668.jpg" },
+      { id: "2669", section: "rakhi", subCategory: "Superhero Collection", title: "Ant-Man Helmet Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2669.jpg" },
+      { id: "2670", section: "rakhi", subCategory: "Superhero Collection", title: "Classic Chibi Spider-Man Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2670.jpg" },
+      { id: "2671", section: "rakhi", subCategory: "Superhero Collection", title: "Green Lantern Hero Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2671.jpg" },
+
+      // Table 4: Nazar Collection
+      { id: "2681", section: "rakhi", subCategory: "Nazar Collection", title: "Blue Heart Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2681.jpg" },
+      { id: "2682", section: "rakhi", subCategory: "Nazar Collection", title: "Red Circular Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2682.jpg" },
+      { id: "2683", section: "rakhi", subCategory: "Nazar Collection", title: "Green Marquise Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2683.jpg" },
+
+      // Table 5: Devotional Collection (Batch 2)
+      { id: "2691", section: "rakhi", subCategory: "Devotional Collection", title: "Little Bal Krishna Lotus Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2691.jpg" },
+      { id: "2692", section: "rakhi", subCategory: "Devotional Collection", title: "Royal Peacock Ganesha Circular Rakhi", price: 35, mrp: 40, stock: 2, image: "images/2692.jpg" }
+    ];

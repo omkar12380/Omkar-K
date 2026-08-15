@@ -1,0 +1,27 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "inventory"
+    label: "Rakhi Inventory"
+    files:
+      - file: "products.json"
+        label: "Product List"
+        name: "products_file"
+        fields:
+          - label: "Products"
+            name: "products"
+            widget: "list"
+            fields:
+              - { label: "ID Code", name: "id", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Section", name: "section", widget: "string" }
+              - { label: "Sub Category", name: "subCategory", widget: "string" }
+              - { label: "Price (₹)", name: "price", widget: "number" }
+              - { label: "MRP (₹)", name: "mrp", widget: "number" }
+              - { label: "Available Stock", name: "stock", widget: "number" }
+              - { label: "Image Path", name: "image", widget: "string" }
