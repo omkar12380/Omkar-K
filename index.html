@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=1200, initial-scale=0.3">
   <title>Advik Creation - Handcrafted Rakhis, Jewelry & Crafts</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- QRCode.js library for generating dynamic QR codes -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
   <style>
     :root {
       --theme-bg: #F9ECE4;
@@ -286,6 +288,15 @@
     .btn-whatsapp-order:hover { background-color: #1eb956; }
     .btn-whatsapp-order:disabled { background-color: #ccc; cursor: not-allowed; }
 
+    /* Dynamic QR Container */
+    #qrcodeCanvas img, #qrcodeCanvas canvas {
+      margin: 0 auto;
+      border: 1px solid var(--theme-muted);
+      border-radius: 8px;
+      padding: 6px;
+      background: white;
+    }
+
     /* Coming Soon Container */
     .coming-soon-container {
       background: white; border-radius: 12px; border: 1px dashed var(--theme-accent-blue);
@@ -348,11 +359,11 @@
       <p>Exclusive Handcrafted Rakhis, Custom Jewelry & Art Works</p>
     </div>
 
-    <!-- Universal Sorting Controls (Active across all product views) -->
+    <!-- Sorting Controls -->
     <div class="controls-bar" id="controlsBar">
       <span class="sort-label">Sort By:</span>
       <select class="sort-select" id="sortOption" onchange="renderGrid()">
-        <option value="code-asc">Code: Low to High</option>
+        <option value="code-asc">Code: Low to High (2601, 2602...)</option>
         <option value="code-desc">Code: High to Low</option>
         <option value="price-asc">Price: Low to High</option>
         <option value="price-desc">Price: High to Low</option>
@@ -401,14 +412,14 @@
         </div>
       </div>
 
-      <!-- GPay QR Code Section -->
+      <!-- Dynamic UPI QR Code Section -->
       <div id="qrSection" style="text-align: center; margin: 12px 0; display: none;">
         <p style="font-size: 12px; font-weight: bold; color: #1E1E1E; margin-bottom: 6px;">
-          Scan & Pay via GPay / PhonePe / Paytm
+          Scan & Pay <span id="qrAmountLabel" style="color:#C62828;">₹0</span> via GPay / PhonePe / Paytm
         </p>
-        <img src="gpay-qr.png" alt="GPay QR Code" style="width: 140px; height: 140px; border-radius: 8px; border: 1px solid #E6D2C5; padding: 4px; background: white;" onerror="this.onerror=null; this.src='https://via.placeholder.com/140?text=Upload+gpay-qr.png';">
-        <p style="font-size: 10px; color: #718B99; margin-top: 4px;">
-          Please attach the payment screenshot on WhatsApp
+        <div id="qrcodeCanvas"></div>
+        <p style="font-size: 10px; color: #718B99; margin-top: 6px;">
+          Please attach payment screenshot on WhatsApp
         </p>
       </div>
 
@@ -428,6 +439,7 @@
 
   <script>
     const whatsappNumber = "919403643268";
+    const upiId = "9403643268@ybl"; // Enter your exact UPI ID (PhonePe/GPay/Paytm VPA)
     const businessName = "Advik Creation";
 
     const productsData = [
@@ -512,7 +524,6 @@
       const controlsBar = document.getElementById('controlsBar');
       const comingSoonCategories = ['Handmade Flowers', 'Artisan Jewelry', 'Craft Goods'];
 
-      // Hide grid & sorting only if category is currently 'Coming Soon'
       if (comingSoonCategories.includes(currentMainCategory)) {
         controlsBar.style.display = 'none';
         displayArea.innerHTML = `
@@ -524,7 +535,6 @@
         return;
       }
 
-      // Show sorting bar for 'All Products', 'Handcrafted Rakhis', and any active category
       controlsBar.style.display = 'flex';
       displayArea.innerHTML = `<div class="product-grid" id="productGrid"></div>`;
       const grid = document.getElementById('productGrid');
@@ -539,13 +549,12 @@
         filtered = filtered.filter(p => p.subCategory === currentRakhiFilter);
       }
 
-      // Apply Sorting across whichever banner/tab is selected
       const sortValue = document.getElementById('sortOption').value;
       filtered.sort((a, b) => {
         if (sortValue === 'price-asc') return a.price - b.price;
         if (sortValue === 'price-desc') return b.price - a.price;
         if (sortValue === 'code-desc') return parseInt(b.id) - parseInt(a.id);
-        return parseInt(a.id) - parseInt(b.id); // Default: code-asc (2601, 2602...)
+        return parseInt(a.id) - parseInt(b.id);
       });
 
       filtered.forEach(product => {
@@ -634,6 +643,27 @@
       updateCartUI();
     }
 
+    function generateDynamicQRCode(amount) {
+      const qrContainer = document.getElementById('qrcodeCanvas');
+      qrContainer.innerHTML = ''; // Clear previous QR Code
+
+      if (amount <= 0) return;
+
+      // Deep link URI for standard UPI payment with exact total amount
+      const upiURI = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(businessName)}&am=${amount}&cu=INR`;
+
+      new QRCode(qrContainer, {
+        text: upiURI,
+        width: 140,
+        height: 140,
+        colorDark: "#1E1E1E",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      document.getElementById('qrAmountLabel').innerText = `₹${amount}`;
+    }
+
     function setPaymentMethod(method) {
       selectedPaymentMethod = method;
       document.getElementById('payBtnGpay').classList.toggle('active', method === 'gpay');
@@ -646,6 +676,8 @@
         if (method === 'gpay') {
           qrSection.style.display = 'block';
           codNotice.style.display = 'none';
+          const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+          generateDynamicQRCode(grandTotal);
         } else {
           qrSection.style.display = 'none';
           codNotice.style.display = 'block';
