@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=1200, initial-scale=0.3">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Advik Creation - Handcrafted Rakhis, Jewelry & Crafts</title>
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <!-- QRCode.js library for generating dynamic QR codes -->
@@ -24,7 +24,7 @@
     /* Top Navigation Bar */
     .header {
       background: #FFF5EE;
-      padding: 12px 8%;
+      padding: 12px 5%;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -35,6 +35,790 @@
       z-index: 1000;
     }
 
+    .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo img { height: 45px; width: auto; object-fit: contain; }
+    .brand-text {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--theme-dark);
+      font-family: 'Playfair Display', Georgia, serif;
+      letter-spacing: 0.5px;
+    }
+
+    .contact-btn {
+      background-color: var(--theme-dark);
+      color: var(--theme-bg);
+      padding: 6px 14px;
+      border-radius: 20px;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .contact-phone { font-weight: 700; font-size: 12px; letter-spacing: 0.5px; line-height: 1.2; }
+    .contact-name { font-size: 10px; font-weight: 600; color: var(--theme-muted); letter-spacing: 0.5px; line-height: 1.2; margin-top: 1px; }
+    .contact-btn:hover { background-color: var(--theme-accent-blue); color: white; }
+    .contact-btn:hover .contact-name { color: #E0EBF0; }
+
+    /* Main Navigation Bar */
+    .category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      background: white;
+      padding: 12px 3%;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.03);
+      flex-wrap: wrap;
+    }
+    
+    .sub-category-nav {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      background: #F4E4DA;
+      padding: 10px 3%;
+      border-bottom: 1px solid var(--theme-muted);
+      flex-wrap: wrap;
+    }
+
+    .cat-btn {
+      background: var(--theme-bg);
+      border: 1px solid var(--theme-muted);
+      color: var(--theme-dark);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .cat-btn:hover, .cat-btn.active {
+      background: var(--theme-dark);
+      color: var(--theme-bg);
+      border-color: var(--theme-dark);
+    }
+    .cat-btn-tag { font-size: 9px; font-weight: 500; opacity: 0.8; margin-top: 1px; letter-spacing: 0.3px; }
+
+    .sub-btn {
+      background: white;
+      border: 1px solid var(--theme-muted);
+      color: var(--theme-dark);
+      padding: 6px 12px;
+      border-radius: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 12px;
+    }
+    .sub-btn:hover, .sub-btn.active {
+      background: var(--theme-accent-blue);
+      color: white;
+      border-color: var(--theme-accent-blue);
+    }
+
+    /* Main Container */
+    .container { width: 92%; max-width: 1200px; margin: 20px auto; }
+    .hero-banner {
+      background: linear-gradient(135deg, #EED7CA, #E2C7B8);
+      color: var(--theme-dark);
+      padding: 25px 15px;
+      border-radius: 12px;
+      text-align: center;
+      margin-bottom: 20px;
+      border: 1px solid var(--theme-muted);
+    }
+    .hero-banner h1 { font-size: 22px; margin-bottom: 6px; }
+    .hero-banner p { font-size: 13px; }
+
+    /* Responsive Controls Bar for Sorting */
+    .controls-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    .sort-label { font-size: 13px; font-weight: 700; color: var(--theme-dark); }
+    .sort-select {
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--theme-muted);
+      background: white;
+      color: var(--theme-dark);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Responsive Product Grid */
+    .product-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+      gap: 15px; 
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 14px;
+      border: 1px solid var(--theme-muted);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .card:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(113, 139, 153, 0.15); }
+    .card-img-container { position: relative; }
+    .card img { width: 100%; height: 190px; object-fit: cover; border-radius: 8px; margin-bottom: 10px; }
+    .product-code-badge {
+      position: absolute; top: 6px; left: 6px; background: rgba(30, 30, 30, 0.85); color: white;
+      font-size: 10px; font-weight: bold; padding: 2px 6px; border-radius: 4px; font-family: monospace;
+    }
+    .card-category { font-size: 10px; color: var(--theme-accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .card-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: #333; height: 38px; overflow: hidden; line-height: 1.3; }
+
+    .price-row { display: flex; align-items: baseline; gap: 6px; margin: 8px 0; }
+    .price { font-size: 16px; font-weight: bold; color: var(--theme-dark); }
+    .mrp { font-size: 12px; text-decoration: line-through; color: #888; }
+
+    .stock-badge { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 10px; margin-bottom: 10px; }
+    .stock-available { background: #E8F5E9; color: #2E7D32; }
+    .stock-low { background: #FFEBEE; color: #C62828; }
+    .stock-out { background: #EEEEEE; color: #777777; }
+
+    /* Action Buttons */
+    .btn-add-cart {
+      background-color: var(--theme-dark);
+      color: var(--theme-bg);
+      border: none;
+      padding: 10px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 13px;
+      transition: background 0.2s;
+    }
+    .btn-add-cart:hover { background-color: var(--theme-accent-blue); color: white; }
+    .btn-add-cart.disabled { background-color: #ccc; color: #777; cursor: not-allowed; }
+
+    /* Floating Cart Button */
+    .cart-float-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--theme-dark);
+      color: var(--theme-bg);
+      border: none;
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      font-size: 1.3rem;
+    }
+    .cart-count-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      background: #C62828;
+      color: white;
+      border-radius: 50%;
+      width: 22px;
+      height: 22px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+    }
+
+    /* Cart Drawer */
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1002; display: none; }
+    .cart-overlay.active { display: block; }
+    .cart-drawer {
+      position: fixed; top: 0; right: -100%; width: 380px; max-width: 100%; height: 100%;
+      background: white; z-index: 1003; box-shadow: -4px 0 20px rgba(0,0,0,0.15); transition: right 0.3s ease;
+      display: flex; flex-direction: column;
+    }
+    .cart-drawer.active { right: 0; }
+    .cart-header { background: var(--theme-dark); color: var(--theme-bg); padding: 16px 18px; display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h2 { font-size: 1.1rem; }
+    .close-cart { background: none; border: none; color: var(--theme-bg); font-size: 1.5rem; cursor: pointer; }
+    .cart-items { flex-grow: 1; overflow-y: auto; padding: 16px; }
+    .cart-item { display: flex; gap: 10px; margin-bottom: 12px; border-bottom: 1px solid var(--theme-muted); padding-bottom: 12px; align-items: center; }
+    .cart-item-img { width: 60px; height: 60px; object-fit: cover; border-radius: 6px; }
+    .cart-item-details { flex-grow: 1; }
+    .cart-item-title { font-weight: 700; font-size: 0.85rem; margin-bottom: 4px; color: #333; }
+    .cart-item-price { color: var(--theme-dark); font-weight: 700; font-size: 0.8rem; }
+    .cart-qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 4px; }
+    .cart-qty-btn { background: var(--theme-bg); border: 1px solid var(--theme-muted); width: 22px; height: 22px; border-radius: 4px; font-weight: 700; cursor: pointer; }
+    .cart-item-remove { background: none; border: none; color: #C62828; cursor: pointer; font-size: 0.95rem; }
+
+    /* Payment Selection Buttons */
+    .payment-selection { margin: 10px 0; text-align: left; }
+    .payment-selection label { font-size: 11px; font-weight: 700; color: var(--theme-dark); display: block; margin-bottom: 5px; }
+    .payment-options { display: flex; gap: 8px; }
+    .payment-option-btn {
+      flex: 1; padding: 7px 4px; border: 1px solid var(--theme-muted); background: white;
+      border-radius: 6px; font-size: 11px; font-weight: 600; cursor: pointer; text-align: center;
+      transition: all 0.2s; color: var(--text-dark);
+    }
+    .payment-option-btn.active {
+      background: var(--theme-dark); color: var(--theme-bg); border-color: var(--theme-dark);
+    }
+
+    .cart-footer { padding: 16px; border-top: 1px solid var(--theme-muted); background: var(--theme-bg); }
+    .cart-total { display: flex; justify-content: space-between; font-size: 1rem; font-weight: 700; margin-bottom: 6px; color: var(--theme-dark); }
+    .btn-whatsapp-order {
+      background-color: #25D366; color: white; border: none; width: 100%; padding: 11px; border-radius: 6px;
+      font-weight: 700; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 6px; transition: background 0.2s; margin-top: 8px;
+    }
+    .btn-whatsapp-order:hover { background-color: #1eb956; }
+    .btn-whatsapp-order:disabled { background-color: #ccc; cursor: not-allowed; }
+
+    /* Dynamic QR Container */
+    #qrcodeCanvas img, #qrcodeCanvas canvas {
+      margin: 0 auto;
+      border: 1px solid var(--theme-muted);
+      border-radius: 8px;
+      padding: 5px;
+      background: white;
+    }
+
+    /* Mobile Responsive Overrides */
+    @media (max-width: 600px) {
+      .header { padding: 10px 4%; }
+      .brand-text { font-size: 17px; }
+      .brand-logo img { height: 38px; }
+      .contact-btn { padding: 4px 10px; }
+      .contact-phone { font-size: 11px; }
+
+      .controls-bar {
+        justify-content: space-between;
+        width: 100%;
+      }
+      .sort-select {
+        font-size: 12px;
+        padding: 6px 8px;
+      }
+      .product-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 10px;
+      }
+      .card { padding: 10px; }
+      .card img { height: 140px; }
+      .card-title { font-size: 12px; height: 32px; }
+      .price { font-size: 14px; }
+      .mrp { font-size: 11px; }
+      .btn-add-cart { padding: 8px; font-size: 12px; }
+    }
+
+    /* Coming Soon Container */
+    .coming-soon-container {
+      background: white; border-radius: 12px; border: 1px dashed var(--theme-accent-blue);
+      padding: 50px 15px; text-align: center; margin: 20px 0;
+    }
+    .coming-soon-title { font-size: 22px; font-weight: 700; color: var(--theme-dark); margin-bottom: 6px; }
+    .coming-soon-subtitle { font-size: 13px; color: var(--theme-accent-blue); font-weight: 600; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <a href="#" class="brand-logo">
+      <img src="advik-logo.png" alt="Advik Creation Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/F9ECE4/1E1E1E?text=ADVIK+CREATION';">
+      <span class="brand-text">Advik Creation</span>
+    </a>
+    <a href="tel:+919403643268" class="contact-btn">
+      <span class="contact-phone">📞 🇮🇳 +91 9403643268</span>
+      <span class="contact-name">Advik Creation</span>
+    </a>
+  </header>
+
+  <!-- Navigation Banners -->
+  <nav class="category-nav">
+    <button class="cat-btn active" onclick="setMainCategory('all', this)">
+      <span>All Products</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('rakhi', this)">
+      <span>🪔 Handcrafted Rakhis</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Handmade Flowers', this)">
+      <span>🌸 Handmade Flowers</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Artisan Jewelry', this)">
+      <span>💎 Artisan Jewelry</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+    <button class="cat-btn" onclick="setMainCategory('Craft Goods', this)">
+      <span>🎨 Craft Goods</span>
+      <span class="cat-btn-tag">(Coming Soon)</span>
+    </button>
+  </nav>
+
+  <!-- Sub-filter Nav -->
+  <div class="sub-category-nav" id="rakhiSubNav" style="display: none;">
+    <button class="sub-btn active" onclick="setRakhiSubFilter('All Rakhis', this)">All Rakhis</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Traditional & Designer Collection', this)">Traditional & Designer</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Kids & Cartoon Collection', this)">Kids & Cartoon</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Superhero Collection', this)">Superhero</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Nazar Collection', this)">Nazar Collection</button>
+    <button class="sub-btn" onclick="setRakhiSubFilter('Devotional Collection', this)">Devotional Collection</button>
+  </div>
+
+  <!-- Main Container -->
+  <div class="container">
+    <div class="hero-banner">
+      <h1>Welcome to Advik Creation</h1>
+      <p>Exclusive Handcrafted Rakhis, Custom Jewelry & Art Works</p>
+    </div>
+
+    <!-- Universal Responsive Sorting Controls -->
+    <div class="controls-bar" id="controlsBar">
+      <span class="sort-label">Sort By:</span>
+      <select class="sort-select" id="sortOption" onchange="renderGrid()">
+        <option value="code-asc">Code: Low to High</option>
+        <option value="code-desc">Code: High to Low</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </div>
+
+    <div id="displayArea">
+      <div class="product-grid" id="productGrid"></div>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button -->
+  <button class="cart-float-btn" onclick="toggleCart()">
+    🛒
+    <span class="cart-count-badge" id="cartCount">0</span>
+  </button>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Your Shopping Cart</h2>
+      <button class="close-cart" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>
+    </div>
+    
+    <!-- Cart Footer -->
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total Amount:</span>
+        <span id="cartTotalAmount">₹0</span>
+      </div>
+
+      <!-- Payment Method Selection -->
+      <div class="payment-selection" id="paymentSelection" style="display: none;">
+        <label>Select Payment Method:</label>
+        <div class="payment-options">
+          <button type="button" class="payment-option-btn active" id="payBtnGpay" onclick="setPaymentMethod('gpay')">
+            📱 Online / GPay
+          </button>
+          <button type="button" class="payment-option-btn" id="payBtnCod" onclick="setPaymentMethod('cod')">
+            💵 Cash on Delivery
+          </button>
+        </div>
+      </div>
+
+      <!-- Dynamic UPI QR Code Section -->
+      <div id="qrSection" style="text-align: center; margin: 10px 0; display: none;">
+        <p style="font-size: 11px; font-weight: bold; color: #1E1E1E; margin-bottom: 5px;">
+          Scan & Pay <span id="qrAmountLabel" style="color:#C62828;">₹0</span> via GPay / PhonePe / Paytm
+        </p>
+        <div id="qrcodeCanvas"></div>
+        <p style="font-size: 9px; color: #718B99; margin-top: 5px;">
+          Please attach payment screenshot on WhatsApp
+        </p>
+      </div>
+
+      <!-- COD Notice -->
+      <div id="codNotice" style="text-align: center; margin: 10px 0; display: none; background: #FFF; padding: 6px; border-radius: 6px; border: 1px dashed #718B99;">
+        <p style="font-size: 11px; font-weight: 600; color: #1E1E1E;">
+          💵 Cash on Delivery Selected
+        </p>
+        <p style="font-size: 9px; color: #555;">Pay cash directly upon delivery.</p>
+      </div>
+
+      <button class="btn-whatsapp-order" id="whatsappOrderBtn" onclick="sendWhatsAppOrder()" disabled>
+        💬 Order via WhatsApp
+      </button>
+    </div>
+  </div>
+
+  <script>
+    const whatsappNumber = "919403643268";
+    const upiId = "9403643268@ybl"; // Enter your exact UPI ID (PhonePe/GPay/Paytm VPA)
+    const businessName = "Advik Creation";
+
+    const productsData = [
+      // Table 1: Traditional & Designer Collection
+      { id: "2601", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Ganesha & Om Devotional Rakhi", price: 35, mrp: 40, stock: 4, image: "images/2601.jpg" },
+      { id: "2602", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Golden Peepal Leaf Om Beaded Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2602.jpg" },
+      { id: "2603", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Kundan Lotus Floral Rakhi", price: 45, mrp: 55, stock: 7, image: "images/2603.jpg" },
+      { id: "2604", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Traditional Temple Gold Beaded Rakhi", price: 45, mrp: 55, stock: 6, image: "images/2604.jpg" },
+      { id: "2605", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Antique Floral Crystal Blue Rakhi", price: 40, mrp: 45, stock: 6, image: "images/2605.jpg" },
+      { id: "2606", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sacred Swastik & Crescent Motif Rakhi", price: 45, mrp: 55, stock: 3, image: "images/2606.jpg" },
+      { id: "2607", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Silver Pearl \"BHAI\" Script Rakhi", price: 30, mrp: 35, stock: 4, image: "images/2607.jpg" },
+      { id: "2608", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Classic Emerald & Pearl Floral Rakhi", price: 50, mrp: 60, stock: 6, image: "images/2608.jpg" },
+      { id: "2609", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Royal Peacock Teardrop Gem Rakhi", price: 40, mrp: 45, stock: 2, image: "images/2609.jpg" },
+      { id: "2610", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Azure Peacock Feather Beaded Rakhi", price: 50, mrp: 60, stock: 2, image: "images/2610.jpg" },
+      { id: "2611", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Sunburst Divine Om Rakhi", price: 35, mrp: 40, stock: 3, image: "images/2611.jpg" },
+      { id: "2612", section: "rakhi", subCategory: "Traditional & Designer Collection", title: "Pearl Encircled Om Sky Blue Rakhi", price: 65, mrp: 75, stock: 6, image: "images/2612.jpg" },
+
+      // Table 2: Kids & Cartoon Collection
+      { id: "2651", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Yellow Minion Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2651.jpg" },
+      { id: "2652", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Motu Patlu Duo Kids Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2652.jpg" },
+      { id: "2653", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Doraemon Oval Charm Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2653.jpg" },
+      { id: "2654", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Astronaut Space Explorer Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2654.jpg" },
+      { id: "2655", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "PAW Patrol Chase Yellow Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2655.jpg" },
+      { id: "2656", section: "rakhi", subCategory: "Kids & Cartoon Collection", title: "Winged Magical Unicorn Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2656.jpg" },
+
+      // Table 3: Superhero Collection
+      { id: "2661", section: "rakhi", subCategory: "Superhero Collection", title: "Captain America Shield Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2661.jpg" },
+      { id: "2662", section: "rakhi", subCategory: "Superhero Collection", title: "Incredible Hulk Standing Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2662.jpg" },
+      { id: "2663", section: "rakhi", subCategory: "Superhero Collection", title: "Iron Man Flying Pose Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2663.jpg" },
+      { id: "2664", section: "rakhi", subCategory: "Superhero Collection", title: "Doctor Strange Magical Shield Rakhi", price: 30, mrp: 35, stock: 2, image: "images/2664.jpg" },
+      { id: "2665", section: "rakhi", subCategory: "Superhero Collection", title: "Thor God of Thunder Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2665.jpg" },
+      { id: "2666", section: "rakhi", subCategory: "Superhero Collection", title: "Captain Marvel Heroic Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2666.jpg" },
+      { id: "2667", section: "rakhi", subCategory: "Superhero Collection", title: "Chibi Hulk Green Thread Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2667.jpg" },
+      { id: "2668", section: "rakhi", subCategory: "Superhero Collection", title: "Deadpool Action Stance Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2668.jpg" },
+      { id: "2669", section: "rakhi", subCategory: "Superhero Collection", title: "Ant-Man Helmet Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2669.jpg" },
+      { id: "2670", section: "rakhi", subCategory: "Superhero Collection", title: "Classic Chibi Spider-Man Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2670.jpg" },
+      { id: "2671", section: "rakhi", subCategory: "Superhero Collection", title: "Green Lantern Hero Rakhi", price: 30, mrp: 35, stock: 1, image: "images/2671.jpg" },
+
+      // Table 4: Nazar Collection
+      { id: "2681", section: "rakhi", subCategory: "Nazar Collection", title: "Blue Heart Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2681.jpg" },
+      { id: "2682", section: "rakhi", subCategory: "Nazar Collection", title: "Red Circular Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2682.jpg" },
+      { id: "2683", section: "rakhi", subCategory: "Nazar Collection", title: "Green Marquise Nazar 🧿 Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2683.jpg" },
+
+      // Table 5: Devotional Collection (Batch 2)
+      { id: "2691", section: "rakhi", subCategory: "Devotional Collection", title: "Little Bal Krishna Lotus Rakhi", price: 35, mrp: 40, stock: 1, image: "images/2691.jpg" },
+      { id: "2692", section: "rakhi", subCategory: "Devotional Collection", title: "Royal Peacock Ganesha Circular Rakhi", price: 35, mrp: 40, stock: 2, image: "images/2692.jpg" }
+    ];
+
+    let currentMainCategory = 'all';
+    let currentRakhiFilter = 'All Rakhis';
+    let cart = [];
+    let selectedPaymentMethod = 'gpay';
+
+    function setMainCategory(cat, btnElement) {
+      currentMainCategory = cat;
+      currentRakhiFilter = 'All Rakhis';
+
+      document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+
+      const rakhiSubNav = document.getElementById('rakhiSubNav');
+      if (cat === 'rakhi') {
+        rakhiSubNav.style.display = 'flex';
+        document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+        document.querySelector('.sub-btn').classList.add('active');
+      } else {
+        rakhiSubNav.style.display = 'none';
+      }
+
+      renderGrid();
+    }
+
+    function setRakhiSubFilter(subCat, btnElement) {
+      currentRakhiFilter = subCat;
+      document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+      btnElement.classList.add('active');
+      renderGrid();
+    }
+
+    function renderGrid() {
+      const displayArea = document.getElementById('displayArea');
+      const controlsBar = document.getElementById('controlsBar');
+      const comingSoonCategories = ['Handmade Flowers', 'Artisan Jewelry', 'Craft Goods'];
+
+      if (comingSoonCategories.includes(currentMainCategory)) {
+        controlsBar.style.display = 'none';
+        displayArea.innerHTML = `
+          <div class="coming-soon-container">
+            <h2 class="coming-soon-title">Coming Soon ✨</h2>
+            <p class="coming-soon-subtitle">We are crafting beautiful ${currentMainCategory} for you. Stay tuned!</p>
+          </div>
+        `;
+        return;
+      }
+
+      controlsBar.style.display = 'flex';
+      displayArea.innerHTML = `<div class="product-grid" id="productGrid"></div>`;
+      const grid = document.getElementById('productGrid');
+
+      let filtered = [...productsData];
+
+      if (currentMainCategory !== 'all') {
+        filtered = filtered.filter(p => p.section === currentMainCategory);
+      }
+
+      if (currentMainCategory === 'rakhi' && currentRakhiFilter !== 'All Rakhis') {
+        filtered = filtered.filter(p => p.subCategory === currentRakhiFilter);
+      }
+
+      const sortValue = document.getElementById('sortOption').value;
+      filtered.sort((a, b) => {
+        if (sortValue === 'price-asc') return a.price - b.price;
+        if (sortValue === 'price-desc') return b.price - a.price;
+        if (sortValue === 'code-desc') return parseInt(b.id) - parseInt(a.id);
+        return parseInt(a.id) - parseInt(b.id);
+      });
+
+      filtered.forEach(product => {
+        const discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
+
+        let stockBadgeHtml = '';
+        if (product.stock > 4) {
+          stockBadgeHtml = `<span class="stock-badge stock-available">Available Stock: ${product.stock}</span>`;
+        } else if (product.stock > 0) {
+          stockBadgeHtml = `<span class="stock-badge stock-low">Low Stock: Only ${product.stock} left!</span>`;
+        } else {
+          stockBadgeHtml = `<span class="stock-badge stock-out">Out of Stock</span>`;
+        }
+
+        grid.innerHTML += `
+          <div class="card">
+            <div>
+              <div class="card-img-container">
+                <img src="${product.image}" alt="${product.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/300/F9ECE4/718B99?text=${encodeURIComponent(product.title)}';">
+                <span class="product-code-badge">#${product.id}</span>
+              </div>
+              <div class="card-category">${product.subCategory}</div>
+              <div class="card-title">${product.title}</div>
+
+              <div class="price-row">
+                <span class="price">₹${product.price}</span>
+                <span class="mrp">₹${product.mrp}</span>
+                <span style="color: green; font-weight: bold; font-size: 11px;">${discount}% OFF</span>
+              </div>
+              
+              <div>${stockBadgeHtml}</div>
+            </div>
+
+            ${product.stock > 0 ? `
+              <button onclick="addToCart('${product.id}')" class="btn-add-cart">
+                🛒 Add to Cart
+              </button>
+            ` : `
+              <button class="btn-add-cart disabled" disabled>Out of Stock</button>
+            `}
+          </div>
+        `;
+      });
+    }
+
+    /* Cart Operations & UI Updates */
+    function addToCart(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        if (existing.qty < product.stock) {
+          existing.qty++;
+        } else {
+          alert(`Sorry, only ${product.stock} left in stock for this item.`);
+          return;
+        }
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      toggleCart(true);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      const product = productsData.find(p => p.id === productId);
+      const newQty = item.qty + delta;
+
+      if (newQty <= 0) {
+        removeFromCart(productId);
+      } else if (newQty > product.stock) {
+        alert(`Sorry, only ${product.stock} left in stock for this item.`);
+      } else {
+        item.qty = newQty;
+        updateCartUI();
+      }
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartUI();
+    }
+
+    function generateDynamicQRCode(amount) {
+      const qrContainer = document.getElementById('qrcodeCanvas');
+      qrContainer.innerHTML = ''; // Clear previous QR Code
+
+      if (amount <= 0) return;
+
+      const upiURI = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(businessName)}&am=${amount}&cu=INR`;
+
+      new QRCode(qrContainer, {
+        text: upiURI,
+        width: 130,
+        height: 130,
+        colorDark: "#1E1E1E",
+        colorLight: "#FFFFFF",
+        correctLevel: QRCode.CorrectLevel.H
+      });
+
+      document.getElementById('qrAmountLabel').innerText = `₹${amount}`;
+    }
+
+    function setPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      document.getElementById('payBtnGpay').classList.toggle('active', method === 'gpay');
+      document.getElementById('payBtnCod').classList.toggle('active', method === 'cod');
+
+      const qrSection = document.getElementById('qrSection');
+      const codNotice = document.getElementById('codNotice');
+
+      if (cart.length > 0) {
+        if (method === 'gpay') {
+          qrSection.style.display = 'block';
+          codNotice.style.display = 'none';
+          const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+          generateDynamicQRCode(grandTotal);
+        } else {
+          qrSection.style.display = 'none';
+          codNotice.style.display = 'block';
+        }
+      }
+    }
+
+    function updateCartUI() {
+      const countBadge = document.getElementById('cartCount');
+      const itemsList = document.getElementById('cartItemsList');
+      const totalAmountElem = document.getElementById('cartTotalAmount');
+      const orderBtn = document.getElementById('whatsappOrderBtn');
+      const paymentSelection = document.getElementById('paymentSelection');
+      const qrSection = document.getElementById('qrSection');
+      const codNotice = document.getElementById('codNotice');
+
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      countBadge.innerText = totalQty;
+      totalAmountElem.innerText = `₹${grandTotal}`;
+      orderBtn.disabled = cart.length === 0;
+
+      if (cart.length === 0) {
+        itemsList.innerHTML = `<p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>`;
+        paymentSelection.style.display = 'none';
+        qrSection.style.display = 'none';
+        codNotice.style.display = 'none';
+        return;
+      }
+
+      paymentSelection.style.display = 'block';
+      setPaymentMethod(selectedPaymentMethod);
+
+      itemsList.innerHTML = '';
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" class="cart-item-img" alt="${item.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/100/F9ECE4/718B99?text=Rakhi';">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">₹${item.price} x ${item.qty} = ₹${itemTotal}</div>
+            <div class="cart-qty-controls">
+              <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', -1)">-</button>
+              <span>${item.qty}</span>
+              <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑️</button>
+        `;
+        itemsList.appendChild(div);
+      });
+    }
+
+    function toggleCart(forceOpen = false) {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartOverlay');
+      if (forceOpen || !drawer.classList.contains('active')) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+      } else {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    }
+
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) return;
+
+      let text = `Hello ${businessName}!\n\nI would like to place an order for the following items:\n\n`;
+      let grandTotal = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        grandTotal += subtotal;
+        text += `${index + 1}. ${item.title} (#${item.id})\n   Qty: ${item.qty} x ₹${item.price} = ₹${subtotal}\n\n`;
+      });
+
+      text += `---------------------------\n`;
+      text += `*Total Order Amount: ₹${grandTotal}*\n`;
+      text += `*Payment Method:* ${selectedPaymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 'Online / GPay (Screenshot attached)'}\n\n`;
+      
+      if (selectedPaymentMethod === 'gpay') {
+        text += `Please find my payment screenshot attached. Thank you!`;
+      } else {
+        text += `Please confirm my Cash on Delivery order. Thank you!`;
+      }
+
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank');
+    }
+
+    renderGrid();
+  </script>
+  <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
+</body>
+</html>
     .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
     .brand-logo img { height: 52px; width: auto; object-fit: contain; }
     .brand-text {
