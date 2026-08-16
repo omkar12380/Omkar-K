@@ -133,6 +133,27 @@
     }
     .hero-banner h1 { font-size: 26px; margin-bottom: 6px; }
 
+    /* Control Bar for Sorting */
+    .controls-bar {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+    .sort-label { font-size: 13px; font-weight: 700; color: var(--theme-dark); }
+    .sort-select {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--theme-muted);
+      background: white;
+      color: var(--theme-dark);
+      font-weight: 600;
+      font-size: 13px;
+      cursor: pointer;
+      outline: none;
+    }
+
     /* Product Grid & Card */
     .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
     .card {
@@ -288,7 +309,7 @@
     </a>
   </header>
 
-  <!-- Navigation -->
+  <!-- Navigation Banners -->
   <nav class="category-nav">
     <button class="cat-btn active" onclick="setMainCategory('all', this)">
       <span>All Products</span>
@@ -327,6 +348,17 @@
       <p>Exclusive Handcrafted Rakhis, Custom Jewelry & Art Works</p>
     </div>
 
+    <!-- Universal Sorting Controls (Active across all product views) -->
+    <div class="controls-bar" id="controlsBar">
+      <span class="sort-label">Sort By:</span>
+      <select class="sort-select" id="sortOption" onchange="renderGrid()">
+        <option value="code-asc">Code: Low to High (2601, 2602...)</option>
+        <option value="code-desc">Code: High to Low</option>
+        <option value="price-asc">Price: Low to High</option>
+        <option value="price-desc">Price: High to Low</option>
+      </select>
+    </div>
+
     <div id="displayArea">
       <div class="product-grid" id="productGrid"></div>
     </div>
@@ -349,7 +381,7 @@
       <p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>
     </div>
     
-    <!-- Cart Footer with Payment Option & Dynamic QR -->
+    <!-- Cart Footer -->
     <div class="cart-footer">
       <div class="cart-total">
         <span>Total Amount:</span>
@@ -447,7 +479,7 @@
     let currentMainCategory = 'all';
     let currentRakhiFilter = 'All Rakhis';
     let cart = [];
-    let selectedPaymentMethod = 'gpay'; // 'gpay' or 'cod'
+    let selectedPaymentMethod = 'gpay';
 
     function setMainCategory(cat, btnElement) {
       currentMainCategory = cat;
@@ -477,9 +509,12 @@
 
     function renderGrid() {
       const displayArea = document.getElementById('displayArea');
+      const controlsBar = document.getElementById('controlsBar');
       const comingSoonCategories = ['Handmade Flowers', 'Artisan Jewelry', 'Craft Goods'];
 
+      // Hide grid & sorting only if category is currently 'Coming Soon'
       if (comingSoonCategories.includes(currentMainCategory)) {
+        controlsBar.style.display = 'none';
         displayArea.innerHTML = `
           <div class="coming-soon-container">
             <h2 class="coming-soon-title">Coming Soon ✨</h2>
@@ -489,10 +524,12 @@
         return;
       }
 
+      // Show sorting bar for 'All Products', 'Handcrafted Rakhis', and any active category
+      controlsBar.style.display = 'flex';
       displayArea.innerHTML = `<div class="product-grid" id="productGrid"></div>`;
       const grid = document.getElementById('productGrid');
 
-      let filtered = productsData;
+      let filtered = [...productsData];
 
       if (currentMainCategory !== 'all') {
         filtered = filtered.filter(p => p.section === currentMainCategory);
@@ -501,6 +538,15 @@
       if (currentMainCategory === 'rakhi' && currentRakhiFilter !== 'All Rakhis') {
         filtered = filtered.filter(p => p.subCategory === currentRakhiFilter);
       }
+
+      // Apply Sorting across whichever banner/tab is selected
+      const sortValue = document.getElementById('sortOption').value;
+      filtered.sort((a, b) => {
+        if (sortValue === 'price-asc') return a.price - b.price;
+        if (sortValue === 'price-desc') return b.price - a.price;
+        if (sortValue === 'code-desc') return parseInt(b.id) - parseInt(a.id);
+        return parseInt(a.id) - parseInt(b.id); // Default: code-asc (2601, 2602...)
+      });
 
       filtered.forEach(product => {
         const discount = Math.round(((product.mrp - product.price) / product.mrp) * 100);
