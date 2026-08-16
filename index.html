@@ -7,18 +7,17 @@
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
   <style>
     :root {
-      /* Palette Extracted from Logo Image */
-      --theme-bg: #F9ECE4;          /* Warm Cream/Nude background */
-      --theme-card-bg: #FFFFFF;     /* Pure white for card contrast */
-      --theme-accent-blue: #718B99; /* Slate Blue from logo droplet */
-      --theme-dark: #1E1E1E;        /* Elegant dark text/accents */
-      --theme-muted: #E6D2C5;       /* Warm border/neutral tone */
-      --theme-hover: #EED7CA;      /* Subtle hover shade */
+      --theme-bg: #F9ECE4;
+      --theme-card-bg: #FFFFFF;
+      --theme-accent-blue: #718B99;
+      --theme-dark: #1E1E1E;
+      --theme-muted: #E6D2C5;
+      --theme-hover: #EED7CA;
       --text-dark: #2C2C2C;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--theme-bg); color: var(--text-dark); }
+    body { background-color: var(--theme-bg); color: var(--text-dark); padding-bottom: 60px; }
 
     /* Top Navigation Bar */
     .header {
@@ -34,17 +33,8 @@
       z-index: 1000;
     }
 
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-    }
-    .brand-logo img {
-      height: 52px;
-      width: auto;
-      object-fit: contain;
-    }
+    .brand-logo { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+    .brand-logo img { height: 52px; width: auto; object-fit: contain; }
     .brand-text {
       font-size: 24px;
       font-weight: 700;
@@ -53,7 +43,6 @@
       letter-spacing: 1px;
     }
 
-    /* Stacked Contact Pill Button */
     .contact-btn {
       background-color: var(--theme-dark);
       color: var(--theme-bg);
@@ -66,27 +55,10 @@
       justify-content: center;
       transition: background 0.2s;
     }
-    .contact-phone {
-      font-weight: 700;
-      font-size: 13px;
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-    }
-    .contact-name {
-      font-size: 10px;
-      font-weight: 600;
-      color: var(--theme-muted);
-      letter-spacing: 0.5px;
-      line-height: 1.2;
-      margin-top: 1px;
-    }
-    .contact-btn:hover {
-      background-color: var(--theme-accent-blue);
-      color: white;
-    }
-    .contact-btn:hover .contact-name {
-      color: #E0EBF0;
-    }
+    .contact-phone { font-weight: 700; font-size: 13px; letter-spacing: 0.5px; line-height: 1.2; }
+    .contact-name { font-size: 10px; font-weight: 600; color: var(--theme-muted); letter-spacing: 0.5px; line-height: 1.2; margin-top: 1px; }
+    .contact-btn:hover { background-color: var(--theme-accent-blue); color: white; }
+    .contact-btn:hover .contact-name { color: #E0EBF0; }
 
     /* Main Navigation Bar */
     .category-nav {
@@ -99,7 +71,6 @@
       flex-wrap: wrap;
     }
     
-    /* Sub-filter Bar for Rakhi Collections */
     .sub-category-nav {
       display: flex;
       justify-content: center;
@@ -130,14 +101,7 @@
       color: var(--theme-bg);
       border-color: var(--theme-dark);
     }
-
-    .cat-btn-tag {
-      font-size: 9px;
-      font-weight: 500;
-      opacity: 0.8;
-      margin-top: 1px;
-      letter-spacing: 0.3px;
-    }
+    .cat-btn-tag { font-size: 9px; font-weight: 500; opacity: 0.8; margin-top: 1px; letter-spacing: 0.3px; }
 
     .sub-btn {
       background: white;
@@ -157,12 +121,7 @@
     }
 
     /* Main Container */
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 25px auto;
-    }
-
+    .container { width: 90%; max-width: 1200px; margin: 25px auto; }
     .hero-banner {
       background: linear-gradient(135deg, #EED7CA, #E2C7B8);
       color: var(--theme-dark);
@@ -174,14 +133,8 @@
     }
     .hero-banner h1 { font-size: 26px; margin-bottom: 6px; }
 
-    /* Product Grid */
-    .product-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    /* Product Card */
+    /* Product Grid & Card */
+    .product-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
     .card {
       background: white;
       border-radius: 12px;
@@ -192,72 +145,29 @@
       justify-content: space-between;
       transition: transform 0.2s, box-shadow 0.2s;
     }
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(113, 139, 153, 0.15);
-    }
-    .card-img-container {
-      position: relative;
-    }
-    .card img {
-      width: 100%;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 12px;
-    }
+    .card:hover { transform: translateY(-4px); box-shadow: 0 8px 20px rgba(113, 139, 153, 0.15); }
+    .card-img-container { position: relative; }
+    .card img { width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 12px; }
     .product-code-badge {
-      position: absolute;
-      top: 8px;
-      left: 8px;
-      background: rgba(30, 30, 30, 0.85);
-      color: white;
-      font-size: 11px;
-      font-weight: bold;
-      padding: 2px 8px;
-      border-radius: 4px;
-      font-family: monospace;
+      position: absolute; top: 8px; left: 8px; background: rgba(30, 30, 30, 0.85); color: white;
+      font-size: 11px; font-weight: bold; padding: 2px 8px; border-radius: 4px; font-family: monospace;
     }
-    .card-category {
-      font-size: 11px;
-      color: var(--theme-accent-blue);
-      font-weight: 700;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .card-title {
-      font-size: 15px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: #333;
-    }
+    .card-category { font-size: 11px; color: var(--theme-accent-blue); font-weight: 700; text-transform: uppercase; margin-bottom: 4px; }
+    .card-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; color: #333; height: 42px; overflow: hidden; }
 
-    /* Price & Stock Display */
-    .price-row {
-      display: flex;
-      align-items: baseline;
-      gap: 8px;
-      margin: 10px 0;
-    }
+    .price-row { display: flex; align-items: baseline; gap: 8px; margin: 10px 0; }
     .price { font-size: 18px; font-weight: bold; color: var(--theme-dark); }
     .mrp { font-size: 13px; text-decoration: line-through; color: #888; }
 
-    .stock-badge {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      padding: 4px 10px;
-      border-radius: 12px;
-      margin-bottom: 12px;
-    }
+    .stock-badge { display: inline-block; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 12px; margin-bottom: 12px; }
     .stock-available { background: #E8F5E9; color: #2E7D32; }
     .stock-low { background: #FFEBEE; color: #C62828; }
     .stock-out { background: #EEEEEE; color: #777777; }
 
-    /* WhatsApp Button */
-    .btn-whatsapp {
-      background-color: #25D366;
-      color: white;
+    /* Action Buttons */
+    .btn-add-cart {
+      background-color: var(--theme-dark);
+      color: var(--theme-bg);
       border: none;
       padding: 12px;
       border-radius: 6px;
@@ -268,38 +178,92 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      text-decoration: none;
       font-size: 14px;
       transition: background 0.2s;
     }
-    .btn-whatsapp:hover { background-color: #1eb956; }
-    .btn-whatsapp.disabled { background-color: #ccc; cursor: not-allowed; }
+    .btn-add-cart:hover { background-color: var(--theme-accent-blue); color: white; }
+    .btn-add-cart.disabled { background-color: #ccc; color: #777; cursor: not-allowed; }
 
-    /* Coming Soon Card Container */
-    .coming-soon-container {
-      background: white;
-      border-radius: 12px;
-      border: 1px dashed var(--theme-accent-blue);
-      padding: 60px 20px;
-      text-align: center;
-      margin: 20px 0;
+    /* Floating Cart Button */
+    .cart-float-btn {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      background: var(--theme-dark);
+      color: var(--theme-bg);
+      border: none;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      font-size: 1.4rem;
     }
-    .coming-soon-title {
-      font-size: 24px;
+    .cart-count-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      background: #C62828;
+      color: white;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      font-size: 0.8rem;
       font-weight: 700;
-      color: var(--theme-dark);
-      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
     }
-    .coming-soon-subtitle {
-      font-size: 14px;
-      color: var(--theme-accent-blue);
-      font-weight: 600;
+
+    /* Cart Drawer */
+    .cart-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.4); z-index: 1002; display: none; }
+    .cart-overlay.active { display: block; }
+    .cart-drawer {
+      position: fixed; top: 0; right: -420px; width: 400px; max-width: 100%; height: 100%;
+      background: white; z-index: 1003; box-shadow: -4px 0 20px rgba(0,0,0,0.15); transition: right 0.3s ease;
+      display: flex; flex-direction: column;
     }
+    .cart-drawer.active { right: 0; }
+    .cart-header { background: var(--theme-dark); color: var(--theme-bg); padding: 18px 20px; display: flex; justify-content: space-between; align-items: center; }
+    .cart-header h2 { font-size: 1.2rem; }
+    .close-cart { background: none; border: none; color: var(--theme-bg); font-size: 1.6rem; cursor: pointer; }
+    .cart-items { flex-grow: 1; overflow-y: auto; padding: 20px; }
+    .cart-item { display: flex; gap: 12px; margin-bottom: 15px; border-bottom: 1px solid var(--theme-muted); padding-bottom: 15px; align-items: center; }
+    .cart-item-img { width: 65px; height: 65px; object-fit: cover; border-radius: 6px; }
+    .cart-item-details { flex-grow: 1; }
+    .cart-item-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 4px; color: #333; }
+    .cart-item-price { color: var(--theme-dark); font-weight: 700; font-size: 0.85rem; }
+    .cart-qty-controls { display: flex; align-items: center; gap: 6px; margin-top: 6px; }
+    .cart-qty-btn { background: var(--theme-bg); border: 1px solid var(--theme-muted); width: 24px; height: 24px; border-radius: 4px; font-weight: 700; cursor: pointer; }
+    .cart-item-remove { background: none; border: none; color: #C62828; cursor: pointer; font-size: 1rem; }
+
+    .cart-footer { padding: 20px; border-top: 1px solid var(--theme-muted); background: var(--theme-bg); }
+    .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: var(--theme-dark); }
+    .btn-whatsapp-order {
+      background-color: #25D366; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px;
+      font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
+      gap: 8px; transition: background 0.2s;
+    }
+    .btn-whatsapp-order:hover { background-color: #1eb956; }
+    .btn-whatsapp-order:disabled { background-color: #ccc; cursor: not-allowed; }
+
+    /* Coming Soon Container */
+    .coming-soon-container {
+      background: white; border-radius: 12px; border: 1px dashed var(--theme-accent-blue);
+      padding: 60px 20px; text-align: center; margin: 20px 0;
+    }
+    .coming-soon-title { font-size: 24px; font-weight: 700; color: var(--theme-dark); margin-bottom: 8px; }
+    .coming-soon-subtitle { font-size: 14px; color: var(--theme-accent-blue); font-weight: 600; }
   </style>
 </head>
 <body>
 
-  <!-- Header with Stacked Contact & Name -->
+  <!-- Header -->
   <header class="header">
     <a href="#" class="brand-logo">
       <img src="advik-logo.png" alt="Advik Creation Logo" onerror="this.onerror=null; this.src='https://via.placeholder.com/150x50/F9ECE4/1E1E1E?text=ADVIK+CREATION';">
@@ -311,7 +275,7 @@
     </a>
   </header>
 
-  <!-- Main Section Navigation -->
+  <!-- Navigation -->
   <nav class="category-nav">
     <button class="cat-btn active" onclick="setMainCategory('all', this)">
       <span>All Products</span>
@@ -333,7 +297,7 @@
     </button>
   </nav>
 
-  <!-- Nested Sub-Filter Bar (Only visible under Rakhi section) -->
+  <!-- Sub-filter Nav -->
   <div class="sub-category-nav" id="rakhiSubNav" style="display: none;">
     <button class="sub-btn active" onclick="setRakhiSubFilter('All Rakhis', this)">All Rakhis</button>
     <button class="sub-btn" onclick="setRakhiSubFilter('Traditional & Designer Collection', this)">Traditional & Designer</button>
@@ -343,16 +307,42 @@
     <button class="sub-btn" onclick="setRakhiSubFilter('Devotional Collection', this)">Devotional Collection</button>
   </div>
 
-  <!-- Main Content -->
+  <!-- Main Container -->
   <div class="container">
     <div class="hero-banner">
       <h1>Welcome to Advik Creation</h1>
       <p>Exclusive Handcrafted Rakhis, Custom Jewelry & Art Works</p>
     </div>
 
-    <!-- Container for Product Grid or Coming Soon Banner -->
     <div id="displayArea">
       <div class="product-grid" id="productGrid"></div>
+    </div>
+  </div>
+
+  <!-- Floating Cart Button -->
+  <button class="cart-float-btn" onclick="toggleCart()">
+    🛒
+    <span class="cart-count-badge" id="cartCount">0</span>
+  </button>
+
+  <!-- Cart Drawer -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-header">
+      <h2>Your Shopping Cart</h2>
+      <button class="close-cart" onclick="toggleCart()">&times;</button>
+    </div>
+    <div class="cart-items" id="cartItemsList">
+      <p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>
+    </div>
+    <div class="cart-footer">
+      <div class="cart-total">
+        <span>Total Amount:</span>
+        <span id="cartTotalAmount">₹0</span>
+      </div>
+      <button class="btn-whatsapp-order" id="whatsappOrderBtn" onclick="sendWhatsAppOrder()" disabled>
+        💬 Order via WhatsApp
+      </button>
     </div>
   </div>
 
@@ -408,6 +398,7 @@
 
     let currentMainCategory = 'all';
     let currentRakhiFilter = 'All Rakhis';
+    let cart = [];
 
     function setMainCategory(cat, btnElement) {
       currentMainCategory = cat;
@@ -437,7 +428,6 @@
 
     function renderGrid() {
       const displayArea = document.getElementById('displayArea');
-      
       const comingSoonCategories = ['Handmade Flowers', 'Artisan Jewelry', 'Craft Goods'];
 
       if (comingSoonCategories.includes(currentMainCategory)) {
@@ -475,9 +465,6 @@
           stockBadgeHtml = `<span class="stock-badge stock-out">Out of Stock</span>`;
         }
 
-        const waText = encodeURIComponent(`Hello ${businessName}! I want to order "${product.title}" (#${product.id}) for ₹${product.price}. Please share payment options.`);
-        const waLink = `https://wa.me/${whatsappNumber}?text=${waText}&name=${encodeURIComponent(businessName)}`;
-
         grid.innerHTML += `
           <div class="card">
             <div>
@@ -497,48 +484,145 @@
               <div>${stockBadgeHtml}</div>
             </div>
 
-${product.stock > 0 ? `
-  <div style="display: flex; align-items: center; justify-content: space-between; margin: 10px 0;">
-    <label style="font-size: 13px; font-weight: bold; color: #444;">Qty:</label>
-    <select id="qty-${product.id}" onchange="updateWaLink('${product.id}', '${encodeURIComponent(product.title)}', ${product.price})" style="padding: 4px 8px; border-radius: 4px; border: 1px solid #ccc; font-size: 13px;">
-      ${Array.from({ length: product.stock }, (_, i) => `<option value="${i + 1}">${i + 1}</option>`).join('')}
-    </select>
-  </div>
-  <a id="btn-${product.id}" href="https://wa.me/919403643268?text=${encodeURIComponent(`Hello Advik Creation! I want to order 1 Qty of "${product.title}" (#${product.id}) for ₹${product.price}.`)}" target="_blank" class="btn-whatsapp">
-    💬 Order via WhatsApp
-  </a>            ` : `
-              <button class="btn-whatsapp disabled" disabled>Out of Stock</button>
+            ${product.stock > 0 ? `
+              <button onclick="addToCart('${product.id}')" class="btn-add-cart">
+                🛒 Add to Cart
+              </button>
+            ` : `
+              <button class="btn-add-cart disabled" disabled>Out of Stock</button>
             `}
           </div>
         `;
       });
     }
 
-    function updateWaLink(id, encodedTitle, price) {
-  const qty = document.getElementById(`qty-${id}`).value;
-  const totalPrice = price * qty;
-  const title = decodeURIComponent(encodedTitle);
-  const phoneNumber = "919403643268";
-  
-  const message = `Hello Advik Creation! I want to order ${qty} Qty of "${title}" (#${id}) for ₹${totalPrice}.`;
-  const link = document.getElementById(`btn-${id}`);
-  
-  if (link) {
-    link.href = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-  }
-}
+    /* Cart Operations */
+    function addToCart(productId) {
+      const product = productsData.find(p => p.id === productId);
+      if (!product) return;
+
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        if (existing.qty < product.stock) {
+          existing.qty++;
+        } else {
+          alert(`Sorry, only ${product.stock} left in stock for this item.`);
+          return;
+        }
+      } else {
+        cart.push({ ...product, qty: 1 });
+      }
+
+      updateCartUI();
+      toggleCart(true);
+    }
+
+    function updateCartQty(productId, delta) {
+      const item = cart.find(i => i.id === productId);
+      if (!item) return;
+
+      const product = productsData.find(p => p.id === productId);
+      const newQty = item.qty + delta;
+
+      if (newQty <= 0) {
+        removeFromCart(productId);
+      } else if (newQty > product.stock) {
+        alert(`Sorry, only ${product.stock} left in stock for this item.`);
+      } else {
+        item.qty = newQty;
+        updateCartUI();
+      }
+    }
+
+    function removeFromCart(productId) {
+      cart = cart.filter(item => item.id !== productId);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const countBadge = document.getElementById('cartCount');
+      const itemsList = document.getElementById('cartItemsList');
+      const totalAmountElem = document.getElementById('cartTotalAmount');
+      const orderBtn = document.getElementById('whatsappOrderBtn');
+
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      countBadge.innerText = totalQty;
+      totalAmountElem.innerText = `₹${grandTotal}`;
+      orderBtn.disabled = cart.length === 0;
+
+      if (cart.length === 0) {
+        itemsList.innerHTML = `<p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>`;
+        return;
+      }
+
+      itemsList.innerHTML = '';
+      cart.forEach(item => {
+        const itemTotal = item.price * item.qty;
+        const div = document.createElement('div');
+        div.className = 'cart-item';
+        div.innerHTML = `
+          <img src="${item.image}" class="cart-item-img" alt="${item.title}" onerror="this.onerror=null; this.src='https://via.placeholder.com/100/F9ECE4/718B99?text=Rakhi';">
+          <div class="cart-item-details">
+            <div class="cart-item-title">${item.title}</div>
+            <div class="cart-item-price">₹${item.price} x ${item.qty} = ₹${itemTotal}</div>
+            <div class="cart-qty-controls">
+              <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', -1)">-</button>
+              <span>${item.qty}</span>
+              <button class="cart-qty-btn" onclick="updateCartQty('${item.id}', 1)">+</button>
+            </div>
+          </div>
+          <button class="cart-item-remove" onclick="removeFromCart('${item.id}')">🗑️</button>
+        `;
+        itemsList.appendChild(div);
+      });
+    }
+
+    function toggleCart(forceOpen = false) {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartOverlay');
+      if (forceOpen || !drawer.classList.contains('active')) {
+        drawer.classList.add('active');
+        overlay.classList.add('active');
+      } else {
+        drawer.classList.remove('active');
+        overlay.classList.remove('active');
+      }
+    }
+
+    function sendWhatsAppOrder() {
+      if (cart.length === 0) return;
+
+      let text = `Hello ${businessName}!\n\nI would like to place an order for the following items:\n\n`;
+      let grandTotal = 0;
+
+      cart.forEach((item, index) => {
+        const subtotal = item.price * item.qty;
+        grandTotal += subtotal;
+        text += `${index + 1}. ${item.title} (#${item.id})\n   Qty: ${item.qty} x ₹${item.price} = ₹${subtotal}\n\n`;
+      });
+
+      text += `---------------------------\n`;
+      text += `*Total Order Amount: ₹${grandTotal}*\n\n`;
+      text += `Please share payment & delivery options. Thank you!`;
+
+      const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
+      window.open(waUrl, '_blank');
+    }
+
     renderGrid();
   </script>
   <script>
-  if (window.netlifyIdentity) {
-    window.netlifyIdentity.on("init", user => {
-      if (!user) {
-        window.netlifyIdentity.on("login", () => {
-          document.location.href = "/admin/";
-        });
-      }
-    });
-  }
-</script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
 </body>
 </html>
