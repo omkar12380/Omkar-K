@@ -242,12 +242,25 @@
     .cart-qty-btn { background: var(--theme-bg); border: 1px solid var(--theme-muted); width: 24px; height: 24px; border-radius: 4px; font-weight: 700; cursor: pointer; }
     .cart-item-remove { background: none; border: none; color: #C62828; cursor: pointer; font-size: 1rem; }
 
+    /* Payment Option Selectors */
+    .payment-selection { margin: 12px 0; text-align: left; }
+    .payment-selection label { font-size: 12px; font-weight: 700; color: var(--theme-dark); display: block; margin-bottom: 6px; }
+    .payment-options { display: flex; gap: 10px; }
+    .payment-option-btn {
+      flex: 1; padding: 8px 5px; border: 1px solid var(--theme-muted); background: white;
+      border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; text-align: center;
+      transition: all 0.2s; color: var(--text-dark);
+    }
+    .payment-option-btn.active {
+      background: var(--theme-dark); color: var(--theme-bg); border-color: var(--theme-dark);
+    }
+
     .cart-footer { padding: 20px; border-top: 1px solid var(--theme-muted); background: var(--theme-bg); }
-    .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 12px; color: var(--theme-dark); }
+    .cart-total { display: flex; justify-content: space-between; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--theme-dark); }
     .btn-whatsapp-order {
       background-color: #25D366; color: white; border: none; width: 100%; padding: 12px; border-radius: 6px;
       font-weight: 700; font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center;
-      gap: 8px; transition: background 0.2s;
+      gap: 8px; transition: background 0.2s; margin-top: 10px;
     }
     .btn-whatsapp-order:hover { background-color: #1eb956; }
     .btn-whatsapp-order:disabled { background-color: #ccc; cursor: not-allowed; }
@@ -335,11 +348,46 @@
     <div class="cart-items" id="cartItemsList">
       <p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>
     </div>
+    
+    <!-- Cart Footer with Payment Option & Dynamic QR -->
     <div class="cart-footer">
       <div class="cart-total">
         <span>Total Amount:</span>
         <span id="cartTotalAmount">₹0</span>
       </div>
+
+      <!-- Payment Method Selection -->
+      <div class="payment-selection" id="paymentSelection" style="display: none;">
+        <label>Select Payment Method:</label>
+        <div class="payment-options">
+          <button type="button" class="payment-option-btn active" id="payBtnGpay" onclick="setPaymentMethod('gpay')">
+            📱 Online / GPay
+          </button>
+          <button type="button" class="payment-option-btn" id="payBtnCod" onclick="setPaymentMethod('cod')">
+            💵 Cash on Delivery
+          </button>
+        </div>
+      </div>
+
+      <!-- GPay QR Code Section -->
+      <div id="qrSection" style="text-align: center; margin: 12px 0; display: none;">
+        <p style="font-size: 12px; font-weight: bold; color: #1E1E1E; margin-bottom: 6px;">
+          Scan & Pay via GPay / PhonePe / Paytm
+        </p>
+        <img src="gpay-qr.png" alt="GPay QR Code" style="width: 140px; height: 140px; border-radius: 8px; border: 1px solid #E6D2C5; padding: 4px; background: white;" onerror="this.onerror=null; this.src='https://via.placeholder.com/140?text=Upload+gpay-qr.png';">
+        <p style="font-size: 10px; color: #718B99; margin-top: 4px;">
+          Please attach the payment screenshot on WhatsApp
+        </p>
+      </div>
+
+      <!-- COD Notice -->
+      <div id="codNotice" style="text-align: center; margin: 12px 0; display: none; background: #FFF; padding: 8px; border-radius: 6px; border: 1px dashed #718B99;">
+        <p style="font-size: 11px; font-weight: 600; color: #1E1E1E;">
+          💵 Cash on Delivery Selected
+        </p>
+        <p style="font-size: 10px; color: #555;">Pay cash directly upon delivery.</p>
+      </div>
+
       <button class="btn-whatsapp-order" id="whatsappOrderBtn" onclick="sendWhatsAppOrder()" disabled>
         💬 Order via WhatsApp
       </button>
@@ -399,6 +447,7 @@
     let currentMainCategory = 'all';
     let currentRakhiFilter = 'All Rakhis';
     let cart = [];
+    let selectedPaymentMethod = 'gpay'; // 'gpay' or 'cod'
 
     function setMainCategory(cat, btnElement) {
       currentMainCategory = cat;
@@ -496,7 +545,7 @@
       });
     }
 
-    /* Cart Operations */
+    /* Cart Operations & UI Updates */
     function addToCart(productId) {
       const product = productsData.find(p => p.id === productId);
       if (!product) return;
@@ -539,11 +588,33 @@
       updateCartUI();
     }
 
+    function setPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      document.getElementById('payBtnGpay').classList.toggle('active', method === 'gpay');
+      document.getElementById('payBtnCod').classList.toggle('active', method === 'cod');
+
+      const qrSection = document.getElementById('qrSection');
+      const codNotice = document.getElementById('codNotice');
+
+      if (cart.length > 0) {
+        if (method === 'gpay') {
+          qrSection.style.display = 'block';
+          codNotice.style.display = 'none';
+        } else {
+          qrSection.style.display = 'none';
+          codNotice.style.display = 'block';
+        }
+      }
+    }
+
     function updateCartUI() {
       const countBadge = document.getElementById('cartCount');
       const itemsList = document.getElementById('cartItemsList');
       const totalAmountElem = document.getElementById('cartTotalAmount');
       const orderBtn = document.getElementById('whatsappOrderBtn');
+      const paymentSelection = document.getElementById('paymentSelection');
+      const qrSection = document.getElementById('qrSection');
+      const codNotice = document.getElementById('codNotice');
 
       const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
       const grandTotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
@@ -554,8 +625,14 @@
 
       if (cart.length === 0) {
         itemsList.innerHTML = `<p style="text-align: center; color: #777; margin-top: 40px;">Your cart is empty.</p>`;
+        paymentSelection.style.display = 'none';
+        qrSection.style.display = 'none';
+        codNotice.style.display = 'none';
         return;
       }
+
+      paymentSelection.style.display = 'block';
+      setPaymentMethod(selectedPaymentMethod);
 
       itemsList.innerHTML = '';
       cart.forEach(item => {
@@ -604,8 +681,14 @@
       });
 
       text += `---------------------------\n`;
-      text += `*Total Order Amount: ₹${grandTotal}*\n\n`;
-      text += `Please share payment & delivery options. Thank you!`;
+      text += `*Total Order Amount: ₹${grandTotal}*\n`;
+      text += `*Payment Method:* ${selectedPaymentMethod === 'cod' ? 'Cash on Delivery (COD)' : 'Online / GPay (Screenshot attached)'}\n\n`;
+      
+      if (selectedPaymentMethod === 'gpay') {
+        text += `Please find my payment screenshot attached. Thank you!`;
+      } else {
+        text += `Please confirm my Cash on Delivery order. Thank you!`;
+      }
 
       const waUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`;
       window.open(waUrl, '_blank');
